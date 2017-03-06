@@ -31,26 +31,35 @@
         </div>
     </div>
 
-    <form>
+    <form method="get">
         <div class="form-group">
             <label for="keyword">Search Term:</label>
-            <input type="text" class="form-control" id="keyword">
+            <input type="text" class="form-control" id="keyword" value="enter a keyword">
         </div>
         <div class="form-group">
             <label for="location">location</label>
-            <input type="text" class="form-control" id="location">
+            <input type="text" class="form-control" id="location" value="lat,long">
         </div>
         <div class="form-group">
             <label for="radius">Location Radius:</label>
-            <input type="text" class="form-control" id="radius">
+            <input type="text" class="form-control" id="radius" value="25km">
         </div>
         <div class="form-group">
             <label for="max">Max Results:</label>
-            <input type="text" class="form-control" id="max">
+            <input type="text" class="form-control" id="max" value="0 to 50">
         </div>
         <button id="submitButton" type="submit" class="btn btn-default" onclick="sendData()">Submit</button>
     </form>
+
+    <hr>
+    <div class="gelocation-results">
+
+    </div>
+    <hr>
+
 </div>
+
+
 
 </body>
 </html>
