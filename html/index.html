@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" src="../css/indexCSS.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Local JavaScript Functions -->
+    <script src="../javascript/actions.js"></script>
+    <meta charset="UTF-8">
+    <title>Youtube API Project</title>
+</head>
+<body>
+
+<div class="container" style="width: 100%" >
+    <div class="jumbotron" style="text-align: center">
+        <h1>Youtube API Project</h1>
+        <h1>Team Members</h1>
+        <div class="center-block">
+        <img src="../images/matt.jpg" class="img-circle" alt="matt" width="250" height="250">
+        <img src="../images/michael.jpg" class="img-circle " alt="michael kovalsky" width="250" height="250">
+        <img src="../images/veronica.jpg" class="img-circle " alt="veronica" width="250" height="250">
+        <img src="../images/michaelSmith.png" class="img-circle " alt="michael smith" width="250" height="250">
+        </div>
+    </div>
+
+    <form>
+        <div class="form-group">
+            <label for="keyword">Search Term:</label>
+            <input type="text" class="form-control" id="keyword">
+        </div>
+        <div class="form-group">
+            <label for="location">location</label>
+            <input type="text" class="form-control" id="location">
+        </div>
+        <div class="form-group">
+            <label for="radius">Location Radius:</label>
+            <input type="text" class="form-control" id="radius">
+        </div>
+        <div class="form-group">
+            <label for="max">Max Results:</label>
+            <input type="text" class="form-control" id="max">
+        </div>
+        <button id="submitButton" type="submit" class="btn btn-default" onclick="sendData()">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
