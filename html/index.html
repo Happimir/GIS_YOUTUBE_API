@@ -2,39 +2,47 @@
 <html lang="en">
 <head>
 
-    <link rel = "stylesheet" type="text/css" href="../css/indexCSS.css">
 
-    <!-- Latest compiled and minified CSS -->
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <style>
-        /* Always set the map height explicitly to define the size of the div
-         * element that contains the map. */
-        #maps {
-            height: 100%;
-        }
-        /* Optional: Makes the sample page fill the window. */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-    <!--&lt;!&ndash; Latest compiled JavaScript &ndash;&gt;-->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Local JavaScript Functions -->
     <script src="../javascript/actions.js"></script>
+
     <meta charset="UTF-8">
+    <link rel = "stylesheet" type="text/css" href="../css/index.css">
     <title>Youtube API Project</title>
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">4Musketeers</a>
+        </div>
+        <div>
+            <div class="collapse navbar-collapse" id="myNav">
+                <ul class="nav navbar-nav">
+                    <li><a href="#submission">Data Form</a></li>
+                    <li><a href="#geolocation-results">Video Results</a></li>
+                    <li><a href="#map">Map Result</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
 
 <div class="container" style="width: 100%" >
-    <div class="jumbotron" style="text-align: center">
+
+
+    <div id="jumboOne" class="jumbotron" style="text-align: center">
         <h1>Youtube API Project</h1>
         <h1>Team Members</h1>
         <div class="center-block">
@@ -45,7 +53,7 @@
         </div>
     </div>
 
-    <form method="GET" id="submission" >
+    <form  method="GET" id="submission">
         <div class="form-group">
             <label for="q">Search Term:</label>
             <input type="search" class="form-control" id="q" name="q" placeholder="enter a keyword">
@@ -66,31 +74,35 @@
     </form>
 
     <hr>
-    <div class="jumbotron" style="text-align: center" id="geolocation-results">
+    <div class="jumbotron" id="geolocation-results">
 
     </div>
     <hr>
-    <div id="map" style="width:800px;height: 800px"></div>
-    <script>
+    <h1 style="text-align: center">Map Result</h1>
+    <div style="width: 100%;height: 100%; padding: 5%">
+        <div id="map" style="width:1680px;height: 800px; text-align: center"></div>
+        <script>
 
-        function initMap() {
-            var myLatLng = {lat: -25.363, lng: 131.044};
+            function initMap() {
+                var myLatLng = {lat: -25.363, lng: 131.044};
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
-                center: myLatLng
-            });
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 4,
+                    center: myLatLng
+                });
 
-            var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                title: 'Hello World!'
-            });
-        }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6q-84bJv9HWCUDT4_SQ5Bp9WFJW2Z-e4&callback=initMap">
-    </script>
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: 'Hello World!'
+                });
+            }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6q-84bJv9HWCUDT4_SQ5Bp9WFJW2Z-e4&callback=initMap">
+        </script>
+    </div>
+
 </div>
 
 

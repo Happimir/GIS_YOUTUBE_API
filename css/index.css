@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0;
+
+
+}
+
+#jumboOne {
+    background-color: black;
+    color:white;
+    margin: 0;
+
+}
+
+#geolocation-results {
+    background-color: black;
+    margin: 0;
+}
+
+iframe {
+    padding: 2%;
+}
