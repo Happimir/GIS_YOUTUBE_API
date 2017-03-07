@@ -26,27 +26,14 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$htmlBody = <<<END
-<form method="GET">
-  <div>
-    Search Term: <input type="search" id="q" name="q" placeholder="Enter Search Term">
-  </div>
-  <div>
-    Location: <input type="text" id="location" name="location" placeholder="37.42307,-122.08427">
-  </div>
-  <div>
-    Location Radius: <input type="text" id="locationRadius" name="locationRadius" placeholder="5km">
-  </div>
-  <div>
-    Max Results: <input type="number" id="maxResults" name="maxResults" min="1" max="50" step="1" value="25">
-  </div>
-  <input type="submit" value="Search">
-</form>
-END;
-
+$htmlBody = null;
 // This code executes if the user enters a search query in the form
 // and submits the form. Otherwise, the page displays the form above.
-if (isset($_GET['q']) && isset($_GET['maxResults'])) {
+if (isset($_GET['q'])
+    && isset($_GET['maxResults'])
+    && isset($_GET['locationRadius'])
+    && isset($_GET['location'])) {
+
     /*
      * Set $DEVELOPER_KEY to the "API key" value from the "Access" tab of the
     * {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
@@ -92,12 +79,17 @@ if (isset($_GET['q']) && isset($_GET['maxResults'])) {
                 $videoResult['snippet']['title'],
                 $videoResult['recordingDetails']['location']['latitude'],
                 $videoResult['recordingDetails']['location']['longitude']);
+
         }
 
-        $htmlBody .= <<<END
+        
+$htmlBody = <<<END
     <h3>Videos</h3>
     <ul>$videos</ul>
 END;
+
+echo $htmlBody;
+
     } catch (Google_Service_Exception $e) {
         $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
             htmlspecialchars($e->getMessage()));
@@ -105,15 +97,14 @@ END;
         $htmlBody .= sprintf('<p>An client error occurred: <code>%s</code></p>',
             htmlspecialchars($e->getMessage()));
     }
+
+
+
 }
+
+
+
+
 ?>
 
-<!doctype html>
-<html>
-<head>
-    <title>YouTube Geolocation Search</title>
-</head>
-<body>
-<?=$htmlBody?>
-</body>
-</html>
+
