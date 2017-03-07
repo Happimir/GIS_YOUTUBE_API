@@ -71,7 +71,7 @@ if (isset($_GET['q'])
         ));
 
         $videos = '';
-
+        $ids = array();
         // Display the list of matching videos.
         foreach ($videosResponse['items'] as $videoResult) {
             $videos .= sprintf('<li>%s,%s (%s,%s)</li>',
@@ -79,13 +79,21 @@ if (isset($_GET['q'])
                 $videoResult['snippet']['title'],
                 $videoResult['recordingDetails']['location']['latitude'],
                 $videoResult['recordingDetails']['location']['longitude']);
-
+            array_push($ids, $videoResult['id']);
         }
 
-        
+        $frames = "";
+        foreach ($ids as $val) {
+            $frames .= "<iframe width=\"420\" height=\"315\"
+            src=\"https://www.youtube.com/embed/$val\">
+            </iframe>";
+        }
+
+//        <h3>Videos</h3>
+//    <ul>$videos</ul>
 $htmlBody = <<<END
-    <h3>Videos</h3>
-    <ul>$videos</ul>
+    $frames;
+    
 END;
 
 echo $htmlBody;
