@@ -48,18 +48,23 @@ function buttonClick() {
 }
 
 function geocodeAddress(geocoder, resultsMap) {
-  var address = $('#location').val();
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      resultsMap.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-      var location = results[0].geometry.location;
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-  return location;
-}
+        var address = document.getElementById('location').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+                  var lat = results[0].geometry.location.lat;
+      var latS = lat.toString();
+      var lng = results[0].geometry.location.lng;
+      var lngS = lng.toString();
+      resultsMap.setCenter({lat: lat, lng: lng});
+      var latlng = latS.concat(",",lngS);
+      return latlng;
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
