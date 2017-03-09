@@ -108,6 +108,14 @@ echo $htmlBody;
 
 
 
+} else {
+
+    echo "<h1>" . "Something is not set" . "</h1>"
+     . "<h1>" . $_GET['q'] . "</h1>"
+     . "<h1>" . $_GET['location'] . "</h1>"
+     . "<h1>" . $_GET['locationRadius'] . "</h1>" .
+     "<h1>" . $_GET['maxResults'] . "</h1>";
+
 }
 
 
