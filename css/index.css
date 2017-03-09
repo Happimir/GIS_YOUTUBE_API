@@ -10,7 +10,7 @@ body {
 }
 
 #jumboOne {
-    background-color: black;
+    background-image: url("../images/code.jpg");
     color:white;
     margin: 0;
 
@@ -21,6 +21,3 @@ body {
     margin: 0;
 }
 
-iframe {
-    padding: 2%;
-}
