@@ -1,12 +1,18 @@
 #Youtube API Project
 
+#Important
+***YOU MUST HAVE COMPOSER INSTALLED, GO TO COMPOSER.ORG FOR INSTRUCTIONS!***
+
 ##Purpose
     The Purpose of this project was to familiarize ourselves with Youtube's API, along with Google Maps.
     Furthermore, it was a great way to learn how to use an external API in our web project. 
     Was produced for Global Information Systems at the University of Georgia. Instructor: Budak I. Arpinar
+
+![alt text](http://images6.fanpop.com/image/photos/33000000/The-Inventions-of-Kowalski-penguins-of-madagascar-33087567-500-400.jpg 
+"Kowalski, Brains of this operation")
 ##Team Members:
-    Michael Kovalsky
-    Michael Smith
+    Michael Kovalsky: Brains of this operation
+    Michael Smith: 
     Veronica McManus
     Matt Butcher
 
