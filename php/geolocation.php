@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This sample lists videos that are associated with a particular keyword and are in the radius of
  *   particular geographic coordinates by:
@@ -91,12 +90,16 @@ if (isset($_GET['q'])
 
 //        <h3>Videos</h3>
 //    <ul>$videos</ul>
-$htmlBody = <<<END
-    $frames;
-    
-END;
 
-echo $htmlBody;
+        if(isset($_GET['flag'])) {
+            echo json_encode($videosResponse['items']);
+        } else {
+$htmlBody = <<<END
+        $frames;
+END;
+            
+            echo $htmlBody;
+        }
 
     } catch (Google_Service_Exception $e) {
         $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
@@ -113,14 +116,13 @@ echo $htmlBody;
     echo "<h1>" . "Something is not set" . "</h1>"
      . "<h1>" . $_GET['q'] . "</h1>"
      . "<h1>" . $_GET['location'] . "</h1>"
-     . "<h1>" . $_GET['locationRadius'] . "</h1>" .
-     "<h1>" . $_GET['maxResults'] . "</h1>";
+     . "<h1>" . $_GET['locationRadius'] . "</h1>"
+     . "<h1>" . $_GET['maxResults'] . "</h1>";
 
 }
 
-
-
-
 ?>
+
+
 
 
