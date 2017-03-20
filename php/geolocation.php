@@ -8,11 +8,7 @@
  * 2. Retrieving location details for each video with "youtube.videos.list" method and setting
  *   "id" parameter to comma separated list of video IDs in search result.
  *
- * Original Author of the sample code available from Google's developer page:
  * @author Ibrahim Ulukaya
- *
- * Modified for project needs and other requirements for the successful completion of the project
- * @author Michael Kovalsky
  */
 
 /**
@@ -75,7 +71,9 @@ if (isset($_GET['q'])
 
         $videos = '';
         $ids = array();
-        $locs = array();
+        $lat = array();
+        $lon = array();
+        $title = array();
         // Display the list of matching videos.
         foreach ($videosResponse['items'] as $videoResult) {
             $videos .= sprintf('<li>%s,%s (%s,%s)</li>',
@@ -83,17 +81,19 @@ if (isset($_GET['q'])
                 $videoResult['snippet']['title'],
                 $videoResult['recordingDetails']['location']['latitude'],
                 $videoResult['recordingDetails']['location']['longitude']);
-
-            array_push($locs, $videoResult['recordingDetails']['location']['latitude'] . "," . $videoResult['recordingDetails']['location']['longitude']);
             array_push($ids, $videoResult['id']);
+            array_push($lat, $videoResult['recordingDetails']['location']['latitude']);
+            array_push($lon, $videoResult['recordingDetails']['location']['longitude']);
+            array_push($title, $videoResult['snippet']['title']);
         }
 
-        unlink("data.txt");
-        $dataFile = fopen("data.txt", "w") or die("Unable to open/make file");
+        echo "<script src='../javascript/actions.js'></script>
+        
+        <script>
+            addVideoMarkers(" . json_encode($title) . "," . json_encode($lat) . ","  . json_encode($lon) . ");
+        </script>";
 
-        foreach($locs as $data) {
-            fwrite($dataFile, $data . "\n");
-        }
+
 
         $frames = "";
         foreach ($ids as $val) {
@@ -101,6 +101,12 @@ if (isset($_GET['q'])
             src=\"https://www.youtube.com/embed/$val\">
             </iframe>";
         }
+        ///
+
+        ////
+
+        ////
+
 
 //        <h3>Videos</h3>
 //    <ul>$videos</ul>
@@ -108,10 +114,10 @@ if (isset($_GET['q'])
         if(isset($_GET['flag'])) {
             echo json_encode($videosResponse['items']);
         } else {
-$htmlBody = <<<END
+            $htmlBody = <<<END
         $frames;
 END;
-            
+
             echo $htmlBody;
         }
 
@@ -128,10 +134,10 @@ END;
 } else {
 
     echo "<h1>" . "Something is not set" . "</h1>"
-     . "<h1>" . $_GET['q'] . "</h1>"
-     . "<h1>" . $_GET['location'] . "</h1>"
-     . "<h1>" . $_GET['locationRadius'] . "</h1>"
-     . "<h1>" . $_GET['maxResults'] . "</h1>";
+        . "<h1>" . $_GET['q'] . "</h1>"
+        . "<h1>" . $_GET['location'] . "</h1>"
+        . "<h1>" . $_GET['locationRadius'] . "</h1>"
+        . "<h1>" . $_GET['maxResults'] . "</h1>";
 
 }
 

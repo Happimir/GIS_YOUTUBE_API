@@ -1,15 +1,40 @@
+var map;
+
 function geocode() {
 
     var myLatLng = {lat: -25.363, lng: 131.044};
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
         center: myLatLng
     });
 
 
     var geocoder = new google.maps.Geocoder();
     geocodeAddress(geocoder, map);
+}
+
+
+function addVideoMarkers(title, lats, lons){
+    for(var i = 0; i < lats.length; i++){
+        var marker = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(lats[i],lons[i]),
+        });
+
+        var infowindow =  new google.maps.InfoWindow({
+            content: title[i],
+            map: map,
+            position: new google.maps.LatLng(lats[i],lons[i])
+        });
+        marker.addListener('click', function() {
+            infowindow.open(map, this);
+        });
+
+        marker.addListener('dblclick', function() {
+            infowindow.close(map, this);
+        });
+    }
 
 }
 
@@ -44,7 +69,6 @@ function sendData() {
                 maxResults: maxResult
             },
             function (data) {
-                //alert("data 1: " + data);
                 $('#geolocation-results').html(data);
             }
         ),
@@ -58,40 +82,21 @@ function sendData() {
             },
 
             function (data) {
-                //alert("Data 2: " + data);
                 //
                 //myVar = (JSON.stringify(data));
                 myVar = JSON.parse(data);
-                //alert("inner var: " + JSON.stringify(myVar[1].id));
             }
         ), "json")
-    .then(function () {
-        //Probably useless, but i think we can do our map markers with images
-        //and stuff here. We know the id, and that way we can pass it into a
-        //youtube url to get the thumbstick of the video.
-        //myVar = JSON.parse(myVar);
-        for(var i = 0; i < myVar.length; i++) {
-            console.log(JSON.stringify(myVar[i].id));
-        }
-        //alert("myVar: " + myVar[1]);
-    });
+        .then(function () {
+            //literally just here to make sure we don't have sync issues. 
+        });
 }
 
 function buttonClick() {
     $("#submission").submit(function(e) {
         e.preventDefault();
-
-        var array;
-
-        $.when(
-            $.get("../php/data.txt", function (data) {
-                array = data.split(',');
-                alert("Array is: " + array);
-            })
-        ).then(function () {
-            sendData();
-        });
     });
+    sendData();
 }
 
 function geocodeAddress(geocoder, resultsMap) {
@@ -102,6 +107,7 @@ function geocodeAddress(geocoder, resultsMap) {
         if (status === 'OK') {
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
+                zoom: 12,
                 map: resultsMap,
                 position: results[0].geometry.location
             });
