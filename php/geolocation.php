@@ -8,7 +8,11 @@
  * 2. Retrieving location details for each video with "youtube.videos.list" method and setting
  *   "id" parameter to comma separated list of video IDs in search result.
  *
+ * Original Author of the sample code available from Google's developer page:
  * @author Ibrahim Ulukaya
+ *
+ * Modified for project needs and other requirements for the successful completion of the project
+ * @author Michael Kovalsky
  */
 
 /**
@@ -71,6 +75,7 @@ if (isset($_GET['q'])
 
         $videos = '';
         $ids = array();
+        $locs = array();
         // Display the list of matching videos.
         foreach ($videosResponse['items'] as $videoResult) {
             $videos .= sprintf('<li>%s,%s (%s,%s)</li>',
@@ -78,7 +83,16 @@ if (isset($_GET['q'])
                 $videoResult['snippet']['title'],
                 $videoResult['recordingDetails']['location']['latitude'],
                 $videoResult['recordingDetails']['location']['longitude']);
+
+            array_push($locs, $videoResult['recordingDetails']['location']['latitude'] . "," . $videoResult['recordingDetails']['location']['longitude']);
             array_push($ids, $videoResult['id']);
+        }
+
+        unlink("data.txt");
+        $dataFile = fopen("data.txt", "w") or die("Unable to open/make file");
+
+        foreach($locs as $data) {
+            fwrite($dataFile, $data . "\n");
         }
 
         $frames = "";

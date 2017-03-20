@@ -34,7 +34,7 @@ function sendData() {
 
     //Work in progress, whatever the fuck it is that you do, DO NOT CHANGE THE
     //FIRST FUCKING GET MESSAGE. OR THE SECOND ONE, YOU MAY ONLY FUCK AROUND
-    //WITH .THEN() PORTION OF THE CODE! 
+    //WITH .THEN() PORTION OF THE CODE!
     $.when(
         $.get("../php/geolocation.php",
             {
@@ -44,7 +44,7 @@ function sendData() {
                 maxResults: maxResult
             },
             function (data) {
-                alert("data 1: " + data);
+                //alert("data 1: " + data);
                 $('#geolocation-results').html(data);
             }
         ),
@@ -58,11 +58,11 @@ function sendData() {
             },
 
             function (data) {
-                alert("Data 2: " + data);
+                //alert("Data 2: " + data);
                 //
                 //myVar = (JSON.stringify(data));
                 myVar = JSON.parse(data);
-                alert("inner var: " + JSON.stringify(myVar[1].id));
+                //alert("inner var: " + JSON.stringify(myVar[1].id));
             }
         ), "json")
     .then(function () {
@@ -70,15 +70,28 @@ function sendData() {
         //and stuff here. We know the id, and that way we can pass it into a
         //youtube url to get the thumbstick of the video.
         //myVar = JSON.parse(myVar);
-        alert("myVar: " + myVar[1]);
+        for(var i = 0; i < myVar.length; i++) {
+            console.log(JSON.stringify(myVar[i].id));
+        }
+        //alert("myVar: " + myVar[1]);
     });
 }
 
 function buttonClick() {
     $("#submission").submit(function(e) {
         e.preventDefault();
+
+        var array;
+
+        $.when(
+            $.get("../php/data.txt", function (data) {
+                array = data.split(',');
+                alert("Array is: " + array);
+            })
+        ).then(function () {
+            sendData();
+        });
     });
-    sendData();
 }
 
 function geocodeAddress(geocoder, resultsMap) {
