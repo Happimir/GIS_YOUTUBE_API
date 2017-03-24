@@ -88,7 +88,7 @@ function sendData() {
             }
         ), "json")
         .then(function () {
-            //literally just here to make sure we don't have sync issues. 
+            //literally just here to make sure we don't have sync issues.
         });
 }
 
